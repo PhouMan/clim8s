@@ -21,12 +21,3 @@ const askReport = async function(company) {
     }
 };
 
-const checkHasReport = function(company){
-    askReport(company).then(response => {
-        console.log(response);
-    }).catch(error => {
-        console.error('Error:', error);
-    });
-}
-
-checkHasReport("Disney");
