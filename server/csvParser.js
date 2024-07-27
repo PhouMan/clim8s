@@ -1,4 +1,4 @@
-const fs = require('fs');
+const fs = require('fs').promises;
 const Papa = require('papaparse');
 
 // parses the csv data file
