@@ -27,7 +27,12 @@ const parseFile = async function () {
     };
 
 parseFile().then(
-    data => console.log(data)
+    // data => console.log(data)
+    data => {
+	let filtered = data.filter(element => element.name == "AudioEye Inc")?.length == 1 ? true : false;
+	console.log(filtered);
+    }
+
 ).catch(
     error => console.log(error)
 )
