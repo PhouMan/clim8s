@@ -1,9 +1,9 @@
 const fs = require('fs').promises;
 const Papa = require('papaparse');
+const PARSED_PATH = 'parsed.json';
+const fileExists = path => fs.stat(path).then(() => true, () => false);
 
-const PARSED_NAME = 'parsed.json';
-
-// check if user permission obtained to store data
+// TODO: implement check if obtained permission to store data
 // parses the csv data file
 
 const parseFile = async function () {
@@ -28,17 +28,26 @@ const parseFile = async function () {
 
 };
 
-parseFile().then(
-    // data => console.log(data)
-    data => {
-	let nameExists = data.filter(element => element.name == "AudioEye Inc")?.length == 1 ? true : false;
-	console.log(nameExists);
-	fs.writeFile('parsed.json', JSON.stringify(data), function (err) {
-	    if (err) throw err;
-	    console.log('saved');
-	});
-    }
 
-).catch(
-    error => console.log(error)
-)
+const main = async () => {
+    if (await fileExists(PARSED_PATH)) {
+	console.log("lol");
+    } else {
+	parseFile().then(
+	    // data => console.log(data)
+	    data => {
+		let nameExists = data.filter(element => element.name == "AudioEye Inc")?.length == 1 ? true : false;
+		console.log(nameExists);
+		fs.writeFile(PARSED_PATH, JSON.stringify(data), function (err) {
+		    if (err) throw err;
+		    console.log('saved');
+		});
+	    }
+
+	).catch(
+	    error => console.log(error)
+	)
+    }
+}
+
+main();
