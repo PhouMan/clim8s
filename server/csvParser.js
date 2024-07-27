@@ -35,10 +35,27 @@ const insertData = async function(data) {
         database: process.env.DB_NAME
     });
 
-    const insertQuery = `INSERT INTO companyINFO (ticker, name, environment_grade, 
-    environment_level, environment_score, social_grade, 
-    social_level, social_score, governance_grade, governance_level, 
-    governance_score, total_score, total_grade, total_level) VALUES ?`
+    const insertQuery = `
+        INSERT INTO companyINFO (ticker, name, environment_grade, 
+        environment_level, environment_score, social_grade, 
+        social_level, social_score, governance_grade, governance_level, 
+        governance_score, total_score, total_grade, total_level) 
+        VALUES ? 
+        ON DUPLICATE KEY UPDATE 
+        name = VALUES(name), 
+        environment_grade = VALUES(environment_grade), 
+        environment_level = VALUES(environment_level), 
+        environment_score = VALUES(environment_score), 
+        social_grade = VALUES(social_grade), 
+        social_level = VALUES(social_level), 
+        social_score = VALUES(social_score), 
+        governance_grade = VALUES(governance_grade), 
+        governance_level = VALUES(governance_level), 
+        governance_score = VALUES(governance_score), 
+        total_score = VALUES(total_score), 
+        total_grade = VALUES(total_grade), 
+        total_level = VALUES(total_level)
+    `;
     const values = data.map(item => [
         item.ticker,
         item.name,
