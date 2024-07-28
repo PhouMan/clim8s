@@ -22,6 +22,7 @@ const askReport = async function(company) {
     }
 };
 
+export {askReport};
 
 // test function, remove later
 // (async () => {
