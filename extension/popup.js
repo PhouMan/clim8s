@@ -1,8 +1,13 @@
+
+// wait for message of cursor hover over element
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
   if (request.type === 'COMPANY_INFO') {
+
+      // get company name
       let currentCompanyInfo = request.data;
       console.log(currentCompanyInfo);
 
+      // query database for grade
       fetch('http://localhost:3000/whisper', {
         method: 'POST',
         headers: {
@@ -15,6 +20,8 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
           return response.json();
         })
         .then(data => {
+
+          // change extension to include grade
           console.log(data.result);
           document.getElementById('response').textContent = data.result;
         })

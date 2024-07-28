@@ -10,3 +10,8 @@ body {
     padding:0px;
 }
 
+#response {
+    text-align: center;
+    font-size:50px;
+}
+

@@ -99,7 +99,7 @@ async function queryCompanyEnvironmental(name) {
         return(results[0].environment_grade);
 
     } catch (err){
-        return("Error fetching company", err);
+        return;
     } finally {
         await connection.end();
     }

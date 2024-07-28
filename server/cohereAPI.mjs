@@ -1,5 +1,7 @@
-const { CohereClient } = require('cohere-ai');
-require('dotenv').config();
+import { CohereClient } from 'cohere-ai';
+import dotenv from 'dotenv';
+
+dotenv.config();
 
 // asks cohere AI to check for some sort of sustainability report
 const askReport = async function(company) {
