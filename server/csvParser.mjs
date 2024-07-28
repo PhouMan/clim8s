@@ -1,8 +1,9 @@
-const fs = require('fs').promises;
-const Papa = require('papaparse');
-const mysql = require('mysql2/promise');
-require('dotenv').config();
+import { promises as fs } from 'fs';
+import Papa from 'papaparse';
+import mysql from 'mysql2/promise';
+import dotenv from 'dotenv';
 
+dotenv.config();
 // parses the csv data file
 const parseFile = async function () {
 
@@ -95,15 +96,16 @@ async function queryCompanyEnvironmental(name) {
 
     try {
         const [results, fields] = await connection.query(selectQuery)
-        console.log(results[0].environment_grade);
+        return(results[0].environment_grade);
 
     } catch (err){
-        console.log("Error fetching company", err);
+        return;
     } finally {
         await connection.end();
     }
 };
 
+export {queryCompanyEnvironmental};
 
 // parseFile().then(
 //     data => {
