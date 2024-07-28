@@ -19,11 +19,6 @@ for (let i = 0; i < AllComp.length; i++) {
     //let Link = AllLinks[i];
     let Company = AllComp[i];
     Company.addEventListener("mouseenter", (e) => {
-        tagInfo.innerHTML = Company.innerHTML;
-        tagInfo.className = "display";
-        tagInfo.style.left = e.pageX + "px";
-        tagInfo.style.top = e.pageY + "px";
-        console.log(Company.innerHTML);
 
         // send out message to popup.js when user hovers over
         chrome.runtime.sendMessage({type: 'COMPANY_INFO', data: Company.innerHTML});
