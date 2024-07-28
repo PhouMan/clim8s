@@ -20,7 +20,7 @@ const askReport = async function(company) {
         return response.chatHistory[1].message;
     } catch (error) {
         console.error(`Error querying Cohere: ${error}`);
-        return null;
+        return "Grade Not Found";
     }
 };
 

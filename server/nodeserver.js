@@ -15,12 +15,11 @@ app.use(express.json());
 app.post('/whisper', async (req, res) => {
   try {
     console.log('Received whisper request:', req.body.message);
-    const response = await queryCompanyEnvironmental(req.body.message);
-    if (response) {
-      res.json({result: response});
-    } else {
-      res.json({result: ""});
+    let response = await queryCompanyEnvironmental(req.body.message);
+    if (!response || response.trim() === '') {
+      response = await askReport(req.body.message);
     }
+    res.json({ result: response });
   } catch (error) {
     console.error('Error handling whisper:', error);
     res.status(500).json({ error: 'Internal Server Error' });
