@@ -1,17 +1,22 @@
 {
     "manifest_version": 3,
-    "name": "Reading time",
+    "name": "Link Hover",
     "version": "1.0",
+    "permissions": [ "activeTab" ],
     "description": "Add the reading time to Chrome Extension documentation articles",
     "icons": {
         "16": "images/icon-16.png"
     },
+    "action": {
+	"default_popup": "popup/popup.html",
+	"default_icon": "images/icon-16.png"
+    },
     "content_scripts": [
         {
         "matches": [
-            "https://www.google.com/*"
+            "*://*/*"
         ],
-        "js": ["scripts/matches.js"]
+        "js": ["scripts/test.js"]
         }
     ]
 }
