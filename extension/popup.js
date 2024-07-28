@@ -1,4 +1,3 @@
-
 // wait for message of cursor hover over element
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
   if (request.type === 'COMPANY_INFO') {
@@ -23,6 +22,7 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
 
           // change extension to include grade
           console.log(data.result);
+          document.getElementById('name').textContent = currentCompanyInfo;
           document.getElementById('response').textContent = data.result;
         })
         .catch(error => console.error('Error:', error));
