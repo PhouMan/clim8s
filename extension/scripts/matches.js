@@ -1,5 +1,4 @@
 
-
 const link = document.querySelector("h3");
 const style = document.createElement("style");
 
@@ -14,16 +13,22 @@ document.head.insertBefore(style, null);
 
 const tagInfo = document.createElement("span");
 //const AllLinks = document.body.getElementsByTagName("h3");
-// Content script that captures the necessary data
-
 const AllComp = document.body.getElementsByClassName("VuuXrf");
 
 for (let i = 0; i < AllComp.length; i++) {
+    //let Link = AllLinks[i];
     let Company = AllComp[i];
     Company.addEventListener("mouseenter", (e) => {
-        const companyInfo = Company.innerHTML;
-        chrome.runtime.sendMessage({type: 'COMPANY_INFO', data: companyInfo});
+        tagInfo.innerHTML = Company.innerHTML;
+        tagInfo.className = "display";
+        tagInfo.style.left = e.pageX + "px";
+        tagInfo.style.top = e.pageY + "px";
+        console.log(Company.innerHTML);
+
+        // send out message to popup.js when user hovers over
+        chrome.runtime.sendMessage({type: 'COMPANY_INFO', data: Company.innerHTML});
     });
 }
 
-
+tagInfo.className = "hide";
+document.body.insertBefore(tagInfo, null);
