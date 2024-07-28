@@ -19,13 +19,6 @@ const parseFile = async function () {
 	    skipEmptyLines: true
 	})
 
-        const results = Papa.parse(data,
-            {   
-                header: true,
-                skipEmptyLines: true
-            }
-        )
-
         // return json file
         return results.data;
 
@@ -92,16 +85,6 @@ const insertData = async function(data) {
     }
 };
 
-parseFile().then(
-    data => {
-        if (data) {
-            insertData(data);
-        }
-    }
-).catch(
-    error => console.log(error)
-);
-
 const main = async () => {
     if (await !fileExists(PARSED_PATH)) {
 	parseFile().then(
@@ -116,7 +99,8 @@ const main = async () => {
 	)
     }
     // maybe add error handling?
-    insertData(data);
+    // this is a path and not a sting
+    insertData(await fs.readFile(PARSED_PATH));
 }
 
 main();
