@@ -1,6 +1,6 @@
 document.getElementById('sendWhisper').addEventListener('click', () => {
     console.log('Button clicked');
-    const message = "Hello from the popup!";
+    const message = "disney";
     fetch('http://localhost:3000/whisper', {
       method: 'POST',
       headers: {
@@ -13,9 +13,11 @@ document.getElementById('sendWhisper').addEventListener('click', () => {
         return response.json();
       })
       .then(data => {
-        document.getElementById('response').textContent = data.response;
+        console.log(data);
+        document.getElementById('response').textContent = data;
         console.log('Response data:', data);
       })
       .catch(error => console.error('Error:', error));
+
   });
   

@@ -13,8 +13,9 @@ app.use(express.json());
 // Endpoint to receive whisper
 app.post('/whisper', async (req, res) => {
   try {
-    console.log('Received whisper request:', req.body);
-    queryCompanyEnvironmental("disney");
+    console.log('Received whisper request:', req.body.message);
+    const response = await queryCompanyEnvironmental(req.body.message);
+    res.json(response);
   } catch (error) {
     console.error('Error handling whisper:', error);
     res.status(500).json({ error: 'Internal Server Error' });

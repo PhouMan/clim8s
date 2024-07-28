@@ -96,10 +96,10 @@ async function queryCompanyEnvironmental(name) {
 
     try {
         const [results, fields] = await connection.query(selectQuery)
-        console.log(results[0].environment_grade);
+        return(results[0].environment_grade);
 
     } catch (err){
-        console.log("Error fetching company", err);
+        return("Error fetching company", err);
     } finally {
         await connection.end();
     }

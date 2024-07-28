@@ -1,3 +1,5 @@
+
+
 const link = document.querySelector("h3");
 const style = document.createElement("style");
 
@@ -12,18 +14,16 @@ document.head.insertBefore(style, null);
 
 const tagInfo = document.createElement("span");
 //const AllLinks = document.body.getElementsByTagName("h3");
+// Content script that captures the necessary data
+
 const AllComp = document.body.getElementsByClassName("VuuXrf");
 
 for (let i = 0; i < AllComp.length; i++) {
-    //let Link = AllLinks[i];
     let Company = AllComp[i];
     Company.addEventListener("mouseenter", (e) => {
-        tagInfo.innerHTML = Company.innerHTML;
-        tagInfo.className = "display";
-        tagInfo.style.left = e.pageX + "px";
-        tagInfo.style.top = e.pageY + "px";
+        const companyInfo = Company.innerHTML;
+        chrome.runtime.sendMessage({type: 'COMPANY_INFO', data: companyInfo});
     });
 }
 
-tagInfo.className = "hide";
-document.body.insertBefore(tagInfo, null);
+
