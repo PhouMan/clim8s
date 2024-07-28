@@ -1,29 +1,29 @@
+
 {
-    "manifest_version": 3,
-    "name": "ClimateTron3000",
-    "version": "1.0",
-    "description": "Curates websites on search results according to their ecofriendliness",
-    "permissions": [
-        "activeTab",
-        "scripting",
-        "storage"
-      ],
-    "icons": {
-        "16": "images/icon-16.png"
-    },
-    "action": {
-        "default_popup": "./popup/popup.html",
-        "default_icon": "images/icon-16.png"
-    },
-    "background": {
-        "service_worker": "/scripts/background.js"
-      },
-    "content_scripts": [{
-        "matches": ["<all_urls>"],
-        "js": ["scripts/matches.js"]
-    }],
-    "host_permissions": [
-        "http://localhost:3000/"
-      ]
-    
+  "manifest_version": 3,
+  "name": "ClimateTron3000",
+  "version": "1.0",
+  "description": "Curates websites on search results according to their ecofriendliness",
+  "permissions": [
+    "activeTab",
+    "scripting",
+    "storage"
+  ],
+  "icons": {
+    "16": "images/icon-16.png"
+  },
+  "action": {
+    "default_popup": "popup.html",
+    "default_icon": "images/icon-16.png"
+  },
+  "background": {
+    "service_worker": "background.js"
+  },
+  "content_scripts": [{
+    "matches": ["<all_urls>"],
+    "js": ["scripts/matches.js"]
+  }],
+  "host_permissions": [
+    "http://localhost:3000/"
+  ]
 }
