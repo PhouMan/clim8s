@@ -1,17 +1,18 @@
 {
     "manifest_version": 3,
-    "name": "Reading time",
+    "name": "ClimateTron3000",
     "version": "1.0",
-    "description": "Add the reading time to Chrome Extension documentation articles",
+    "description": "Curates websites on search results according to their ecofriendliness",
     "icons": {
         "16": "images/icon-16.png"
     },
-    "content_scripts": [
-        {
-        "matches": [
-            "https://www.google.com/*"
-        ],
+    "action": {
+        "default_popup": "window.html",
+        "default_icon": "images/icon-16.png"
+    },
+    "content_scripts": [{
+        "matches": ["<all_urls>"],
         "js": ["scripts/matches.js"]
-        }
-    ]
+    }]
+    
 }
