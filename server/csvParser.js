@@ -26,14 +26,20 @@ const parseFile = async function () {
     }
 };
 
-// populates MySQL database using data from the .json
-const insertData = async function(data) {
-    const connection = await mysql.createConnection({
+
+async function connect() {
+    const connected = await mysql.createConnection({
         host: process.env.DB_HOST,
         user: process.env.DB_USER,
         password: process.env.DB_PASSWORD,
         database: process.env.DB_NAME
     });
+    return connected;
+};
+
+// populates MySQL database using data from the .json
+const insertData = async function(data) {
+    const connection = connect();
 
     const insertQuery = `
         INSERT INTO companyINFO (ticker, name, environment_grade, 
@@ -82,14 +88,33 @@ const insertData = async function(data) {
         await connection.end();
     }
 };
+//queries the companies environmental grade
+async function queryCompanyEnvironmental(name) {
+    const connection = await connect();
+    const selectQuery = `SELECT * FROM companyINFO WHERE name LIKE "%${name}%"`;
 
-parseFile().then(
-    data => {
-        if (data) {
-            insertData(data);
-        }
+    try {
+        const [results, fields] = await connection.query(selectQuery)
+        console.log(results[0].environment_grade);
+
+    } catch (err){
+        console.log("Error fetching company", err);
+    } finally {
+        await connection.end();
     }
-).catch(
-    error => console.log(error)
-);
+};
 
+
+// parseFile().then(
+//     data => {
+//         if (data) {
+//             insertData(data);
+//         }
+//     }
+// ).catch(
+//     error => console.log(error)
+// );
+
+
+//TEST DELETE THIS
+// queryCompanyEnvironmental("CHEEMS");
