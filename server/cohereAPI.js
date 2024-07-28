@@ -11,13 +11,20 @@ const askReport = async function(company) {
     try {
         // query the LLM
         const response = await cohere.chat({
-            message: `Does ${company} have a ESG environment grade? Please respond in either "yes" or "no"`
+            message: `Does ${company} have an ESG environment grade? Please provide ONLY the letter grade and null if there is no data available`
         });
         
-        return response;
+        // return Cohere's message as a string instead of JSON 
+        return response.chatHistory[1].message;
     } catch (error) {
         console.error(`Error querying Cohere: ${error}`);
         return null;
     }
 };
 
+
+// test function, remove later
+// (async () => {
+//     const result = await askReport("adsoadsoasd");
+//     console.log(result);
+// })();

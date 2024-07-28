@@ -1,3 +1,4 @@
+const link = document.querySelector("h3");
 const style = document.createElement("style");
 
 style.innerHTML = ".hide {display: none;}"
@@ -22,10 +23,7 @@ for (let i = 0; i < AllComp.length; i++) {
         tagInfo.style.left = e.pageX + "px";
         tagInfo.style.top = e.pageY + "px";
     });
-    console.log(Company.innerHTML);
 }
-
-
 
 tagInfo.className = "hide";
 document.body.insertBefore(tagInfo, null);
